@@ -33,17 +33,19 @@
         ::-webkit-scrollbar { width: 0px; background: transparent; }
 
         * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
-        
         body { 
     font-family: 'Lato', sans-serif; 
     background-color: var(--bg-color); 
     color: var(--text-color); 
-    /* CHANGED: Use min-height instead of fixed height/overflow settings */
-    min-height: 100vh;
+    
+    /* FIXES FOR SCROLLING BEHAVIOR */
+    height: 100vh;           /* Forces body to fill the window */
     margin: 0;
-    overflow-x: hidden; 
-    overflow-y: auto; /* Ensures vertical scrolling works */
+    overflow-x: hidden;      /* Prevents side-scrolling */
+    overflow-y: auto;        /* Allows vertical scrolling inside the frame */
 }
+        
+       
 
         /* BACKGROUND PARTICLES */
         /* Find this block: */

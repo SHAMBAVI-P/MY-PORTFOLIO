@@ -54,6 +54,8 @@ else:
     # Inject Resume PDF (if exists)
     # ... (Keep your imports and file logic the same) ...
 
+   # ... (rest of your code remains the same)
+
     # Inject Resume PDF
     if os.path.exists(resume_file_path):
         resume_b64 = get_file_as_base64(resume_file_path)
@@ -62,5 +64,7 @@ else:
             f'href="data:application/pdf;base64,{resume_b64}"'
         )
 
-    # FIX: Set height back to 950 (perfect for laptop) and enable scrolling (for mobile)
+    # FIX: 
+    # 1. Height=950: Fits Laptop & Mobile Desktop Mode perfectly (Removes black space).
+    # 2. Scrolling=True: Allows standard Mobile users to scroll down to see the rest.
     components.html(html_content, height=950, scrolling=True)
