@@ -10,7 +10,7 @@
     
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
-    <style>
+   <style>
         /* -----------------------------------------------------------
            CSS VARIABLES (THEME: GREY & TEAL FINTECH)
            ----------------------------------------------------------- */
@@ -19,9 +19,9 @@
             --text-color: #334155;     
             --text-muted: #64748b;     
             
-            --primary: #0e7490;        /* Teal/Cyan 700 */
-            --secondary: #ecfeff;      /* Cyan 50 */
-            --accent: #155e75;         /* Cyan 800 */
+            --primary: #0e7490;        
+            --secondary: #ecfeff;      
+            --accent: #155e75;         
             
             --card-bg: #ffffff;
             --card-radius: 16px;       
@@ -34,19 +34,26 @@
 
         * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
         
-        /* --- FIX: FORCE BACKGROUND COLOR EVERYWHERE (SOLVES BLACK SCREEN) --- */
-        html, body {
+        /* --- FIX 1: ROOT LEVEL BACKGROUND (Kills Black Screen) --- */
+        html {
+            background-color: var(--bg-color) !important;
+            height: 100%;
             width: 100%;
-            height: 100%; 
+        }
+
+        body {
+            width: 100%;
+            min-height: 100vh; /* content will stretch */
             background-color: var(--bg-color) !important; 
             margin: 0;
             padding: 0;
-            overflow-x: hidden;
+            overflow-x: hidden; /* Prevent side scroll */
+            overflow-y: auto;   /* Allow vertical scroll */
             font-family: 'Lato', sans-serif; 
             color: var(--text-color); 
         }
 
-        /* --- BACKGROUND PARTICLES (LOCKED) --- */
+        /* --- BACKGROUND PARTICLES (Locked to Screen) --- */
         .bg-animation { 
             position: fixed; 
             top: 0; left: 0; 
@@ -87,20 +94,18 @@
         .hero h1 span { color: var(--primary); }
         .hero-subtitle { font-size: 1.5rem; color: var(--text-muted); margin-bottom: 2rem; font-weight: 400; }
         
-        /* HERO BUTTONS */
         .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
         .btn { padding: 12px 35px; background: var(--primary); border: 2px solid var(--primary); border-radius: 50px; color: white; font-weight: 600; font-size: 1rem; cursor: pointer; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(14, 116, 144, 0.3); display: inline-block; }
         .btn:hover { transform: translateY(-5px); background: var(--accent); border-color: var(--accent); box-shadow: 0 10px 25px rgba(14, 116, 144, 0.5); color: white; }
         .btn-outline { background: transparent; color: var(--primary); box-shadow: none; }
         .btn-outline:hover { background: var(--primary); color: white; border-color: var(--primary); }
         
-        /* HERO IMAGE */
         .hero-visual { flex: 1; display: flex; justify-content: center; position: relative; }
         .hero-img-container { width: 350px; height: 350px; border-radius: 50%; overflow: hidden; border: 6px solid white; box-shadow: 0 20px 25px -5px rgba(14, 116, 144, 0.15); position: relative; z-index: 2; animation: breathe 4s ease-in-out infinite; }
         .hero-img-container img { width: 100%; height: 100%; object-fit: cover; }
         @keyframes breathe { 0% { transform: scale(1); border-color: white; } 50% { transform: scale(1.02); border-color: var(--secondary); } 100% { transform: scale(1); border-color: white; } }
 
-        /* CARDS & LAYOUTS */
+        /* CARDS */
         .card-hover-effect { background: #ffffff; border-radius: 16px; border: none; padding: 2rem; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); position: relative; top: 0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
         .card-hover-effect:hover { top: -10px; box-shadow: 0 20px 25px -5px rgba(14, 116, 144, 0.15); }
 
@@ -127,7 +132,6 @@
         .project-content p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; margin-bottom: 1rem; }
         .tech-stack { font-size: 0.8rem; color: var(--primary); font-weight: 700; text-transform: uppercase; }
 
-        /* CERTIFICATIONS (Flip Cards) */
         .achievements-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; justify-content: center; }
         .flip-card { background-color: transparent; height: 220px; perspective: 1000px; }
         .flip-card-inner { position: relative; width: 100%; height: 100%; text-align: center; transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); transform-style: preserve-3d; border-radius: 16px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
@@ -141,7 +145,6 @@
         .flip-card-back h3 { color: white; font-size: 1.3rem; margin-bottom: 10px; }
         .flip-card-back p { color: #ecfeff; font-size: 1rem; }
 
-        /* CONTACT */
         .contact-container { display: flex; flex-wrap: wrap; gap: 4rem; background: white; border-radius: 16px; padding: 3rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
         .contact-info { flex: 1; min-width: 300px; }
         .contact-item { display: flex; align-items: center; margin-bottom: 1.5rem; gap: 1rem; font-size: 1.1rem; color: var(--text-color); }
