@@ -26,15 +26,16 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# 3. Helper Function: Convert Image to Base64
-def get_img_as_base64(file_path):
+# 3. Helper Function: Convert File to Base64
+def get_file_as_base64(file_path):
     with open(file_path, "rb") as f:
         data = f.read()
     return base64.b64encode(data).decode()
 
 # 4. Main Logic
 html_file_path = "index.html"
-image_file_path = "profile.jpg" 
+image_file_path = "profile.jpg"
+resume_file_path = "resume.pdf"  # Make sure your file is named exactly this
 
 if not os.path.exists(html_file_path):
     st.error(f"Error: 'index.html' not found.")
@@ -42,15 +43,22 @@ else:
     with open(html_file_path, 'r', encoding='utf-8') as f:
         html_content = f.read()
 
-    # Image Injection
+    # Inject Image (if exists)
     if os.path.exists(image_file_path):
-        img_b64 = get_img_as_base64(image_file_path)
+        img_b64 = get_file_as_base64(image_file_path)
         html_content = html_content.replace(
             'src="profile.jpg"', 
             f'src="data:image/jpeg;base64,{img_b64}"'
         )
-    else:
-        st.warning("Warning: 'profile.jpg' not found.")
+    
+    # Inject Resume PDF (if exists)
+    if os.path.exists(resume_file_path):
+        resume_b64 = get_file_as_base64(resume_file_path)
+        # Replaces the href="resume.pdf" in HTML with the actual file data
+        html_content = html_content.replace(
+            'href="resume.pdf"',
+            f'href="data:application/pdf;base64,{resume_b64}"'
+        )
 
     # Render with proper height and scrolling
     components.html(html_content, height=950, scrolling=True)
