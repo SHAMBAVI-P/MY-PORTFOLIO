@@ -28,32 +28,33 @@
             
             --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
+        /* 1. FORCE BODY TO FILL SCREEN */
+body { 
+    font-family: 'Lato', sans-serif; 
+    background-color: var(--bg-color); 
+    color: var(--text-color); 
+    /* Ensures the body takes up at least the full screen height */
+    min-height: 100vh;
+    margin: 0;
+    overflow-x: hidden; 
+}
+
+/* 2. FIX THE BACKGROUND SO IT DOESN'T SCROLL AWAY */
+.bg-animation {
+    position: fixed; /* This locks it to the screen */
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    z-index: -1;
+    overflow: hidden;
+}
 
         /* HIDE SCROLLBAR */
         ::-webkit-scrollbar { width: 0px; background: transparent; }
 
         * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
-        body { 
-    font-family: 'Lato', sans-serif; 
-    background-color: var(--bg-color); 
-    color: var(--text-color); 
-    
-    /* FIXES FOR SCROLLING BEHAVIOR */
-    height: 100vh;           /* Forces body to fill the window */
-    margin: 0;
-    overflow-x: hidden;      /* Prevents side-scrolling */
-    overflow-y: auto;        /* Allows vertical scrolling inside the frame */
-}
-        
-       
-
-        /* BACKGROUND PARTICLES */
-        /* Find this block: */
-.bg-animation {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100vh; z-index: -1;
-    overflow: hidden;
-}
-        .particle { position: absolute; background: rgba(14, 116, 144, 0.05); border-radius: 50%; animation: floatUp 25s linear infinite; }
+              .particle { position: absolute; background: rgba(14, 116, 144, 0.05); border-radius: 50%; animation: floatUp 25s linear infinite; }
         .p1 { width: 100px; height: 100px; left: 10%; animation-duration: 30s; }
         .p2 { width: 200px; height: 200px; right: 20%; animation-duration: 40s; top: 80%; }
         .p3 { width: 50px; height: 50px; left: 50%; animation-duration: 20s; bottom: -50px;}
