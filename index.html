@@ -35,14 +35,22 @@
         * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
         
         body { 
-            font-family: 'Lato', sans-serif; 
-            background-color: var(--bg-color); 
-            color: var(--text-color); 
-            overflow-x: hidden; 
-        }
+    font-family: 'Lato', sans-serif; 
+    background-color: var(--bg-color); 
+    color: var(--text-color); 
+    /* CHANGED: Use min-height instead of fixed height/overflow settings */
+    min-height: 100vh;
+    margin: 0;
+    overflow-x: hidden; 
+    overflow-y: auto; /* Ensures vertical scrolling works */
+}
 
         /* BACKGROUND PARTICLES */
-        .bg-animation { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; z-index: -1; overflow: hidden; }
+        /* Find this block: */
+.bg-animation {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100vh; z-index: -1;
+    overflow: hidden;
+}
         .particle { position: absolute; background: rgba(14, 116, 144, 0.05); border-radius: 50%; animation: floatUp 25s linear infinite; }
         .p1 { width: 100px; height: 100px; left: 10%; animation-duration: 30s; }
         .p2 { width: 200px; height: 200px; right: 20%; animation-duration: 40s; top: 80%; }
