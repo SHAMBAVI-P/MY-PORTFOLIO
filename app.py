@@ -10,7 +10,7 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# 2. Aggressive CSS to Remove Streamlit's default UI
+# 2. Aggressive CSS to Remove Streamlit's default UI (White space, headers, footers)
 st.markdown("""
     <style>
         header[data-testid="stHeader"] { display: none; }
@@ -26,7 +26,7 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# 3. Helper Function: Convert File to Base64
+# 3. Helper Function: Convert File to Base64 (for Images & PDF)
 def get_file_as_base64(file_path):
     with open(file_path, "rb") as f:
         data = f.read()
@@ -35,15 +35,16 @@ def get_file_as_base64(file_path):
 # 4. Main Logic
 html_file_path = "index.html"
 image_file_path = "profile.jpg"
-resume_file_path = "resume.pdf"
+resume_file_path = "resume.pdf"  # Ensure your file is named exactly this
 
 if not os.path.exists(html_file_path):
-    st.error(f"Error: 'index.html' not found.")
+    st.error(f"Error: 'index.html' not found. Please make sure the file exists.")
 else:
     with open(html_file_path, 'r', encoding='utf-8') as f:
         html_content = f.read()
 
-    # Inject Image
+    # --- INJECT IMAGE ---
+    # Finds 'src="profile.jpg"' in HTML and replaces it with the actual image code
     if os.path.exists(image_file_path):
         img_b64 = get_file_as_base64(image_file_path)
         html_content = html_content.replace(
@@ -51,7 +52,9 @@ else:
             f'src="data:image/jpeg;base64,{img_b64}"'
         )
     
-    # Inject Resume PDF
+    # --- INJECT RESUME PDF ---
+    # Finds 'href="resume.pdf"' in HTML and replaces it with the actual PDF code
+    # This allows the "Download CV" button to work instantly
     if os.path.exists(resume_file_path):
         resume_b64 = get_file_as_base64(resume_file_path)
         html_content = html_content.replace(
@@ -59,7 +62,7 @@ else:
             f'href="data:application/pdf;base64,{resume_b64}"'
         )
 
-    # --- THE RESPONSIVE FIX ---
-    # height=1000: Fits laptops perfectly.
-    # scrolling=True: Allows mobile users to scroll down naturally.
-    components.html(html_content, height=1000, scrolling=True)
+    # --- FINAL RENDER (Responsive Fix) ---
+    # height=800: Fits inside standard laptop screens so there is no empty space at the bottom.
+    # scrolling=True: Essential for Mobile. It lets the user scroll down to see the rest of the content.
+    components.html(html_content, height=800, scrolling=True)
