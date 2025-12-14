@@ -61,4 +61,4 @@ else:
         )
 
     # Render with proper height and scrolling
-    components.html(html_content, height=950, scrolling=True)
+    components.html(html_content, height=3500, scrolling=False)
